@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Lessons Learned in Developing for Google Glass</title>
+
+	<meta name="description" content="A presentation for DevFest Turkey 2014">
+	<meta name="author" content="Brenda Jin">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="lib/reveal.js-2.6.1/css/reveal.min.css">
+	<link rel="stylesheet" href="lib/reveal.js-2.6.1/css/theme/default.css" id="theme">
+
+	<!-- For syntax highlighting -->
+	<link rel="stylesheet" href="lib/zenburn.css">
+
+	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+	<link rel="stylesheet" href="lib/reveal.js-2.6.1/css/print/paper.css" type="text/css" media="print">
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<script data-main="main" src="/lib/require.js"></script>
+</head>
+
+<body>
+	<div class="reveal">
+	    <div class="slides">
+	        <section>
+		        <h1>Phonegap for Glass</h1>
+		        <h2>Lessons Learned</h2>
+		        <p><a href="http://glass-lessons.divshot.io/">http://glass-lessons.divshot.io/</a></p>
+	        </section>
+	        <section>
+	        	<p>
+		        	<small>Brenda Jin <a href="http://www.twitter.com/cyberneticlove">@cyberneticlove</a></small>
+	        	</p>
+	        </section>
+	        <section>
+	        	<h2>Why Phonegap?</h2>
+	        	<ul>
+	        		<li>Think Interaction</li>
+	        		<li>Prototype quickly</li>
+	        		<li>Use familiar tools</li>
+	        		<li>Learn and test</li>
+	        	</ul>
+	        </section>
+	        <section>
+	        	<h2>Common Complaints</h2>
+	        	<ul>
+	        		<li>Performance</li>
+	        	</ul>
+	        	<aside class="notes">We know this is a small device, and many of the best interactions are going to be compact and succinct. A good interaction will control code bloat.
+	        	</aside>
+	        </section>
+	        <section>
+            	<section>
+            		<h2>Grab Sensor Data</h2>
+            		<p>Create a basic UI</p>
+            		<pre><code data-trim="true">
+// Device APIs are available
+document.addEventListener('deviceready',onDeviceReady);
+
+// Callback function to execute when the device is ready
+function onDeviceReady() {
+    navigator.accelerometer.watchAcceleration(onAccelSuccess, onError, {frequency:1000});
+}
+
+// onAccelSuccess: Get a snapshot of the current acceleration
+function onAccelSuccess(acceleration) {
+    // Show results in document body
+    document.getElementById('accel').innerHTML='Acceleration X: ' + acceleration.x + '\n' +
+    'Acceleration Y: ' + acceleration.y + '\n' +
+    'Acceleration Z: ' + acceleration.z + '\n' +
+    'Timestamp: '      + acceleration.timestamp + '\n';
+}
+		    			</code></pre>
+						</section>
+				</section>
+	        <section>
+	        	<section>
+	        		<h2>Next Steps</h2>
+	        	</section>
+	        	<section>
+	        		<h2>Card Builder API</h2>
+	        		<p>User-friendly Reveal.js example</p>
+            		<pre><code data-trim="true">
+&lt;section&gt; 
+	&lt;section&gt; 
+		&lt;h2&gt; Next Steps&lt;/h2&gt; 
+	&lt;/section&gt; 
+	&lt;section&gt; 
+		&lt;h2&gt; Card Builder API&lt;/h2&gt; 
+	&lt;/section&gt; 
+	&lt;section&gt; 
+		&lt;h2&gt; Accessible methods for UI prototyping&lt;/h2&gt; 
+		&lt;p&gt; Reveal.js example&lt;/p&gt; 
+		&lt;pre&gt;&lt;code data-trim="true"&gt; 
+			
+		&lt;/code&gt;&lt;/pre&gt; 
+	&lt;/section&gt; 
+&lt;/section&gt; 
+	        		</code></pre>
+	        		<aside class="notes">
+	        			Live cards would be a great candidate for this
+	        		</aside>
+	        	</section>
+	        	<section>
+	        		<h2>Phonegap Plugins</h2>
+	        		<p><a href="http://docs.phonegap.com/en/3.4.0/guide_platforms_android_plugin.md.html#Android%20Plugins">Better access to data from hardware sensors</a></p>
+	        		<pre><code data-trim="true">
+&lt;feature name="Echo"&gt;
+    &lt;param name="android-package" value="&lt;full_name_including_namespace&gt;" /&gt;
+    &lt;param name="onload" value="true" /&gt;
+&lt;/feature&gt;
+	        		</code></pre>
+	        		<ul>
+	        			<li>Gesture support - callbacks and listeners</li>
+	        			<li>Gravity</li>
+	        			<li>Magnetic Field</li>
+	        		</ul>
+	        	</section>
+	        	<section>
+	        		<h2>Interface Cleanup</h2>
+	        		<img style="width:45%;" src="https://github.com/brendajin/googleglass-phonegap-example/raw/master/screenshot_accel_data.png">
+	        		<img style="width:45%;" src="https://developers.google.com/glass/images/games-clay-shooter.png">
+	        	</section>
+	        	<section>
+	        		<h2>Starter Kits</h2>
+	        		<ul>
+	        			<li>Live Cards</li>
+	        			<li>Static Cards</li>
+	        			<li>Immersions</li>
+	        		</ul>
+	        	</section>
+	        	<section>
+					<h2>Community Contributions!</h2>
+					<p><a href="https://github.com/brendajin/googleglass-phonegap-example">https://github.com/brendajin/googleglass-phonegap-example</a></p>
+	        	</section>
+	        </section>
+	    </div>
+	</div>
+	<script src="lib/reveal.js-2.6.1/lib/js/head.min.js"></script>
+	<script src="lib/reveal.js-2.6.1/js/reveal.min.js"></script>
+	<script>
+		// Full list of configuration options available here:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			fragments: true,
+
+			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+			// Syntax highlight for <code> elements
+			dependencies: [
+		        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+		        { src: 'lib/reveal.js-2.6.1/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: 'lib/reveal.js-2.6.1/plugin/highlight/highlight.js', async: true, callback: function() { 
+					hljs.initHighlightingOnLoad();
+				} },
+				{ src: 'lib/reveal.js-2.6.1/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+				{ src: 'lib/reveal.js-2.6.1/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+			]
+		});
+
+	</script>
+</body>

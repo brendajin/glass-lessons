@@ -1,0 +1,7 @@
+{
+  "name": "glass-lessons",
+  "root": "public/",
+  "clean_urls": true,
+  "cache_control": {},
+  "routes": {}
+}
